@@ -1,33 +1,31 @@
-name: Node.js CI
+name: Node.js CI/CD Workflow
 
 on:
   push:
     branches:
-main
+      - main
   pull_request:
     branches:
-main
+      - main
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [20.x]
-
+        
     steps:
-name: Checkout repository
+    - name: Checkout repository
       uses: actions/checkout@v3
 
-name: Set up Node.js
+    - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
 
-name: Install dependencies
+    - name: Install dependencies
       run: npm install
 
-name: Start application
+    - name: Start application
       run: npm start
